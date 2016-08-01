@@ -1,0 +1,26 @@
+{
+  "name": "bike-map-app",
+  "version": "1.0.0",
+  "description": "Behind Bars Bike Map App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Katie Vogel",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-google-maps": "^2.3.3",
+    "angular-route": "^1.5.8",
+    "angularjs-geolocation": "^0.1.3",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "mongoose": "^4.5.7",
+    "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app= "bikeApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Behind Bars BikeRoutes Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+  <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.css"/>
+  <!-- <link rel="stylesheet" href="style.css"/> -->
+
+  <!-- Google Maps API  **use the special PARAMS library for static map saved as an image?  -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvg3_r7rbX0ylxvpWSwX8jL5DIvsQGibc&Libraries=drawing"></script>
+  <!-- JS Source -->
+  <script src="vendors/angular/angular.js"></script>
+  <script src="vendors/angular-route/angular-route.js"></script>
+  <script src="vendors/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+
+<script src="MainController.js"></script>
+  <!-- <script src="app.js"></script>
+  <script src="gservice.js"></script> -->
+</head>
+<body ng-controller = "MainController as main">
+
+  <div class = "container">
+    <div class="jumbotron">
+      <img src="/vendors/riserhandlebars.jpg" />
+      <h1>Welcome to a Life Behind Bars</h1>
+      <p>
+        Behind Bars is your solution to creating, saving, and sharing convenient bike routes around the Twin Cities.
+      </p>
+      <p>
+        {{main.message}}
+      </p>
+    </div>
+  </div>
+
+
+
+<div class = "col-md-2">
+
+  <div class="panel panel-default">
+    <div class = "panel-heading">
+      <h2 class= "panel-title text-center">Plan Your Life Behind Bars!</h2>
+    </div>
+    <div class="panel-body">
+      <form name = "loginForm" >
+        <div class = "form-group">
+          <label for="username">Username</label>
+          <input type="text" class = "form-control" id="username"
+          ng-model="main.username" required>
+          <label for="password">Password</label>
+          <input type="text" class= "form-control" id="password" ng-model="main.password" required />
+          <button type="submit" class = "btn btn-success btn-md" ng-click="loginUser()">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class = "col-md-7">
+  <div class = "panel pull-right">
+    <div class = "panel-heading">
+      <h2 class= "panel-title text-center">Create a New Profile</h2>
+    </div>
+    <div class="panel-body">
+      <form name="registerForm">
+        <div class = "form-group">
+
+        <button type="submit" class= "btn btn-danger btn-md" ng-click="registerUser()">Register</button>
+            <div ng-view>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!--   ng-view   load  user profile/bikeRoutes here  !> -->
+  </body>
+</html>
