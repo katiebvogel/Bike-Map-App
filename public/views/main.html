@@ -2,7 +2,7 @@
 <html ng-app= "bikeApp">
   <head>
     <meta charset="utf-8">
-    <title>Behind Bars BikeRoutes Application</title>
+    <title>bikeApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
@@ -15,10 +15,16 @@
   <script src="vendors/angular/angular.js"></script>
   <script src="vendors/angular-route/angular-route.js"></script>
   <script src="vendors/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+  <script src="vendors/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+  <script src = "vendors/angular-file-upload/dist/angular-file-upload.js"></script>
 
-<script src="MainController.js"></script>
-  <!-- <script src="app.js"></script>
-  <script src="gservice.js"></script> -->
+  <script src="scripts/bikeApp.module.js"></script>
+  <script src="scripts/bikeApp.config.js"></script>
+  <script src="scripts/MainController.js"></script>
+  <script src="scripts/LoginController.js"></script>
+  <script src="scripts/RegisterController.js"></script>
+  <!-- <script src="gservice.js"></script> -->
+  <base href="/" />
 </head>
 <body ng-controller = "MainController as main">
 
@@ -29,9 +35,9 @@
       <p>
         Behind Bars is your solution to creating, saving, and sharing convenient bike routes around the Twin Cities.
       </p>
-      <p>
+
         {{main.message}}
-      </p>
+
     </div>
   </div>
 
@@ -41,19 +47,18 @@
 
   <div class="panel panel-default">
     <div class = "panel-heading">
-      <h2 class= "panel-title text-center">Plan Your Life Behind Bars!</h2>
+      <h2 class= "panel-title text-center">Plan Your Life Behind Bars</h2>
     </div>
+
     <div class="panel-body">
-      <form name = "loginForm" >
-        <div class = "form-group">
+
           <label for="username">Username</label>
-          <input type="text" class = "form-control" id="username"
-          ng-model="main.username" required>
+          <input type="text"  id="username"
+          ng-model="login.username" required>
           <label for="password">Password</label>
-          <input type="text" class= "form-control" id="password" ng-model="main.password" required />
-          <button type="submit" class = "btn btn-success btn-md" ng-click="loginUser()">Login</button>
-        </div>
-      </form>
+          <input type="text"  id="password" ng-model="login.password" required />
+        <a href="/login"><button class = "btn btn-success btn-md" ng-click="login.loginUser()">Login</button></a>
+
     </div>
   </div>
 </div>
@@ -64,19 +69,22 @@
       <h2 class= "panel-title text-center">Create a New Profile</h2>
     </div>
     <div class="panel-body">
-      <form name="registerForm">
-        <div class = "form-group">
 
-        <button type="submit" class= "btn btn-danger btn-md" ng-click="registerUser()">Register</button>
-            <div ng-view>
+      <a href="/register"><button class= "btn btn-warning btn-md">Register</button></a>
 
-            </div>
-          </div>
-        </form>
       </div>
     </div>
 </div>
+<div ng-view class="registerDisplay">
 
-<!--   ng-view   load  user profile/bikeRoutes here  !> -->
-  </body>
+
+</div>
+<!-- <div ng-view class="profileDisplay">
+
+
+
+</div> -->
+
+
+</body>
 </html>

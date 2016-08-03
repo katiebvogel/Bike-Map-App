@@ -1,0 +1,18 @@
+<div class = "col-md-7">
+  <div class = "panel panel-default">
+    <form name = "newUserForm" enctype = "multipart/form-data" novalidate>
+      <div class = "form-group">
+        <label for="username">Username</label>
+        <input type="text" class = "form-control" id="username" ng-model = "register.formData.username" />
+        <label for="password">Password</label>
+        <input type="text" class = "form-control" id="password" ng-model = "register.formData.password" />
+        <label for="about">About me: </label>
+        <input type="text" class = "form-control" id="about" ng-model = "register.formData.about" />
+        <label for="text" id="profilePic" readonly>Load Profile Picture</label>
+        <input type= "file" ng-file-select="fileSelected($files)" accept= " 'image/*' " />
+        <input type="submit" ng-click="uploadFile()" />
+      </div>
+        <button type="submit" class= "btn btn-danger btn-md" ng-click="registerUser()">Submit Registration</button>
+    </form>
+  </div>
+</div>

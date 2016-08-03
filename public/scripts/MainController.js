@@ -1,6 +1,9 @@
-angular.module('bikeApp').controller('MainController', ['$http', function($http){
+var app = angular.module('bikeApp');
+
+app.controller('MainController', ['$http', function($http){
 
     var vm = this;
 
-    vm.message = "Angular working on Bike App So far "
-}]); 
+    vm.message = "Angular working on Bike App So far"
+
+}]);
