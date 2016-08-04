@@ -1,43 +1,47 @@
 var app = angular.module('bikeApp');
-app.controller('RegisterController', function($http, $upload){
+app.controller('RegisterController', function($http, $location, Upload){
 
 console.log('RegisterController loaded');
-vm = this;
+
+ var vm = this;
 
 vm.formData = {};
 
-vm.uploadFile = function(){
-  vm.fileSelected = function(files){
-    if(files && files.length){
-      vm.file = files[0];
-    }
-
-    $upload.upload({
-      url: '/api/upload',
-      file: vm.file
+vm.uploadFile = function(file){
+    Upload.upload({
+      url: './views/images',
+      data: {file: file, 'username': vm.username}
     })
-    .success(function(data){
-      console.log(data, 'uploaded');
-    });
-  };
-}; //end uploadFile
+    .then(function(response){
+      console.log(response, 'uploaded', response.config.data.file.name, response.data);
+    }, function(response){
+      console.log('Error uploading ', response.status);
+});
+};  //end uploadFile
 
 
+
+//vm.registerUser() is the function that is triggered on the click even in register.html
+//we want to make sure that the uploadFile() function gets run on the submit registration
 
 
   vm.registerUser = function() {
+
+    vm.uploadFile(vm.vile);
+
+
     var userData = {
     username: vm.formData.username,
     password: vm.formData.password,
-    about: vm.formData.about
-    // profilePic: vm.file
+    about: vm.formData.about,
+    profilePic: vm.file
 
   };  //end userData object
 
 
 //Save the user to the DB
 
-$http.post('/users', userData).success(function(data){
+$http.post('/register', userData).success(function(data){
   console.log(userData);
 
     vm.formData.username = "";

@@ -1,9 +1,34 @@
-var app = angular.module('bikeApp');
-
-app.controller('MainController', ['$http', function($http){
+angular.module('bikeApp').controller('MainController', ['$http', '$location', function($http, $location){
 
     var vm = this;
+    // vm.showError = false;
+    vm.username = '';
+    vm.password = '';
 
     vm.message = "Angular working on Bike App So far"
+
+    vm.loginUser = function(){
+      console.log('Username: ', vm.username);
+      console.log('Password: ', vm.password);
+
+      var sendData = {};
+
+      sendData.username = vm.username;
+      sendData.password = vm.password;
+
+      $http.post('/login', sendData).then(handleSuccess, handleFailure);
+    };
+
+    function handleSuccess(response) {
+      console.log('Success', response);
+      $location.path('/profile');
+    };
+
+    function handleFailure(response){
+      console.log('Failure', response);
+      vm.showError = true;
+      alert('Not a match!  Try again or register.');
+      $location.path('/main');
+    };
 
 }]);

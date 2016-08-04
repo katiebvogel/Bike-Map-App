@@ -1,0 +1,45 @@
+<div class="panel-body">
+   <h1>Here are My Bike Routes and My Profile Info </h1>
+ <div ng-repeat="bikeRoute in bikeRoutes">
+   {{profile.bikeRoute}}
+ </div>
+ <div class = "well">
+  Welcome,  {{profile.user.username}} !
+  About: {{profile.user.about}}
+ </div>
+ <div class = "well">
+   <h2> Saved Bike Route Place Holder </h2>
+   <p>
+     {{profile.message}}
+   </p>
+ </div>
+</div>
+<div class = "col-md-8">
+  <div class = "panel panel-default">
+    <form name = "newBikeRouteForm" enctype = "multipart/form-data" novalidate>
+      <div class = "form-group">
+        <h1>Add a New Bike Route!</h1>
+        <label for="startLocation">Start Location: </label>
+        <input type="text" class = "form-control" id="startLocation" ng-model = "profile.formData.startLocation" />
+        <label for="endLocation">End Location: </label>
+        <input type="text" class = "form-control" id="endLocation" ng-model = "profile.formData.endLocation" />
+        <label for="comments">Tell us about your bike route: </label>
+        <input type="text" class = "form-control" id="comments" ng-model = "profile.formData.comments" />
+
+        <label for="images">Upload Photos of your route:  </label>
+        <input type= "file" ngf-select="fileSelected($files)" ngf-accept= " 'image/*' " ngf-max-size = "20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}"/>
+        <!-- <input type="submit" ng-click="uploadFile()" /> -->
+      </div>
+        <div class="form-group">
+          <label for="latitude">Latitude</label>
+          <input type="text" class="form-control" id="latitude" value="44.978" ng-model="formData.latitude" readonly>
+        </div>
+        <div class="form-group">
+          <label for="longitude">Longitude</label>
+          <input type="text" class="form-control" id="longitude" value="-93.265" ng-model="formData.longitude" readonly>
+        </div>
+        <button type="submit" class= "btn btn-danger btn-md" ng-click="profile.newBikeRoute()">Save Bike Route</button>
+    </form>
+    <div id="map" style: "width: 400px; height: 400px"</div>
+  </div>
+</div>

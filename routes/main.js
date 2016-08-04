@@ -1,9 +1,13 @@
 var mongoose = require('mongoose');
-var User = require('./models/user.js');
+var User = require('../models/user.js');
 
 var router = require('express').Router();
 
-router.get('/users', function(request, response){
+router.get('/', function(request, response){
+
+  //let's see what it looks like to Get a user with a route associated
+  console.log('Requesting user', request.user);
+
 
   var query = User.find({});
   query.exec(function(error, users){
@@ -16,7 +20,7 @@ router.get('/users', function(request, response){
 
 });
 
-app.post('/users', function(request, response){
+router.post('/register', function(request, response){
 
   var newuser = new User(request.body);
 
@@ -27,7 +31,7 @@ app.post('/users', function(request, response){
       response.json(request.body);
     }
   });
-}); 
+});
 
 
 

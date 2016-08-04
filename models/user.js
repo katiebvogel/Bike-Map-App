@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-Schema = mongoose.Schema;
-bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
+var routeSchema = require('./route').schema;
 
 
 //add to UserSchema later!
@@ -8,9 +9,10 @@ bcrypt = require('bcrypt');
 var UserSchema = new Schema({
   username: {type: String, required: true, index: {unique: true}},
   password: { type: String, required: true},
-  about: {type: String, required: false}
-  // profilePic: {type: Array, required: false }
-
+  about: {type: String, required: false},
+  profilePic: {type: Object, required: false },
+  // location: {type: [Number]}, //[Long, Lat]
+  routes: [routeSchema]
 });
 
 UserSchema.pre('save', function(next){

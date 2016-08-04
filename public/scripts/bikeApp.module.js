@@ -1,1 +1,1 @@
-angular.module('bikeApp', ['ngRoute', 'angularFileUpload']);
+angular.module('bikeApp', ['ngRoute', 'ngFileUpload', 'geolocation']);

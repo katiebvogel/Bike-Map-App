@@ -5,7 +5,7 @@ var images = multer({dest: 'images/'});
 
 var User = require('../models/user');
 
-router.get('/', function(request, response){
+router.get('/register', function(request, response){
   response.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
 
@@ -13,8 +13,8 @@ router.post('/', function(request, response){
   User.create({
     username: request.body.username,
     password: request.body.password,
-    about: request.body.about
-    // profilePic: request.files['avatar'][0]
+    about: request.body.about,
+    profilePic: request.body.profilePic
   }, function(err, user){
     if(err) {
       console.log(err);

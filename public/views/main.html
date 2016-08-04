@@ -10,20 +10,24 @@
   <!-- <link rel="stylesheet" href="style.css"/> -->
 
   <!-- Google Maps API  **use the special PARAMS library for static map saved as an image?  -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvg3_r7rbX0ylxvpWSwX8jL5DIvsQGibc&Libraries=drawing"></script>
+
   <!-- JS Source -->
   <script src="vendors/angular/angular.js"></script>
   <script src="vendors/angular-route/angular-route.js"></script>
   <script src="vendors/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
   <script src="vendors/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-  <script src = "vendors/angular-file-upload/dist/angular-file-upload.js"></script>
+  <script src = "vendors/ng-file-upload/dist/ng-file-upload.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvg3_r7rbX0ylxvpWSwX8jL5DIvsQGibc&Libraries=drawing"></script>
+
 
   <script src="scripts/bikeApp.module.js"></script>
   <script src="scripts/bikeApp.config.js"></script>
+  <script src="scripts/gservice.js"></script>
   <script src="scripts/MainController.js"></script>
-  <script src="scripts/LoginController.js"></script>
+  <script src="scripts/ProfileController.js"></script>
   <script src="scripts/RegisterController.js"></script>
   <!-- <script src="gservice.js"></script> -->
+
   <base href="/" />
 </head>
 <body ng-controller = "MainController as main">
@@ -54,10 +58,11 @@
 
           <label for="username">Username</label>
           <input type="text"  id="username"
-          ng-model="login.username" required>
+          ng-model="main.username" required>
           <label for="password">Password</label>
-          <input type="text"  id="password" ng-model="login.password" required />
-        <a href="/login"><button class = "btn btn-success btn-md" ng-click="login.loginUser()">Login</button></a>
+          <input type="text"  id="password" ng-model="main.password" required />
+          <!-- <h3 ng-show="main.showError">Incorrect username or password.  Try again or click 'Register'</h3> -->
+        <button class = "btn btn-success btn-md" ng-click="main.loginUser()">Login</button>
 
     </div>
   </div>
@@ -75,15 +80,12 @@
       </div>
     </div>
 </div>
-<div ng-view class="registerDisplay">
+
+<div  class = "col-md-10" ng-view class="loginOrRegisterDisplay">
+
 
 
 </div>
-<!-- <div ng-view class="profileDisplay">
-
-
-
-</div> -->
 
 
 </body>

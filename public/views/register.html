@@ -8,11 +8,12 @@
         <input type="text" class = "form-control" id="password" ng-model = "register.formData.password" />
         <label for="about">About me: </label>
         <input type="text" class = "form-control" id="about" ng-model = "register.formData.about" />
+        
         <label for="text" id="profilePic" readonly>Load Profile Picture</label>
-        <input type= "file" ng-file-select="fileSelected($files)" accept= " 'image/*' " />
-        <input type="submit" ng-click="uploadFile()" />
+        <input type= "file" ngf-select="fileSelected(register.file)" name = "file" ngf-pattern= " 'image/*' " accept= " 'image/*' " ngf-max-size = "50MB" ngf-min-height="100px" ngf-resize="{width: 100px, height: 100px}" ngf-model="register.formData.profilePic"/>
+        <!-- <input type="submit" ng-click="uploadFile()" /> -->
       </div>
-        <button type="submit" class= "btn btn-danger btn-md" ng-click="registerUser()">Submit Registration</button>
+        <button type="submit" class= "btn btn-danger btn-md" ng-click="register.registerUser()">Submit Registration</button>
     </form>
   </div>
 </div>

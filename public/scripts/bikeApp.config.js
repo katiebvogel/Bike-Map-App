@@ -1,13 +1,10 @@
 angular.module('bikeApp').config(['$routeProvider', '$locationProvider',
 function($routeProvider, $locationProvider){
   $routeProvider
-  .when('/success', {
-    templateUrl: '/views/login.html',
-    controller: 'LoginController',
-    controllerAs: 'login'
-  })
-  .when('/failure', {
-    templateUrl: '/views/main.html'
+  .when('/profile', {
+    templateUrl: '/views/profile.html',
+    controller: 'ProfileController',
+    controllerAs: 'profile'
   })
   .when('/register', {
     templateUrl: '/views/register.html',

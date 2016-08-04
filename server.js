@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 
-// var main = require('./routes/main');
+
 var multer = require('multer');
 var passport = require('passport');
 var session = require('express-session');
-
+var jade = require('jade');
 var LocalStrategy = require('passport-local').Strategy;
 
 // include variables for ROUTES below  (model for User, login, register, photos, etc..)
@@ -18,8 +18,13 @@ var User = require('./models/user');
 var register = require('./routes/register');
 var login = require('./routes/login');
 var images = require('./routes/images');
+var main = require('./routes/main');
+var Route = require('./models/route');
+var profile = require('./routes/profile');
 
 var app = express();
+
+
 var mongoURI = "mongodb://localhost/users";
 var MongoDB = mongoose.connect(mongoURI).connection;
 
@@ -43,9 +48,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//view engine?
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use('/views', express.static('views'));
+
 
 
 app.use(bodyParser.json());
+app.use(bodyParser.text());
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static('public'));
@@ -58,6 +71,9 @@ app.get('/', function(request, response){
 
 app.use('/login', login);
 app.use('/register', register);
+app.use('/main', main);
+app.use('/profile', profile);
+app.use('/images', images); 
 
 
 // we need to authenticate the users
