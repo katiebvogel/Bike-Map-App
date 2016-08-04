@@ -6,10 +6,11 @@ var images = multer({dest: './images'});
 var bikeRoute = require('../models/route');
 
 router.get('/', function(request, response){
+  console.log('router get in profile.js', response);
   response.sendFile(path.join(__dirname, '../public/views/profile.html'));
 });
 
-router.post('/profile', function(request, response){
+router.post('/', function(request, response){
   bikeRoute.create({
     startLocation: request.body.startLocation,
     endLocation: request.body.endLocation,

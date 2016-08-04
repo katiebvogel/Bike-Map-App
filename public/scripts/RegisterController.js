@@ -7,10 +7,19 @@ console.log('RegisterController loaded');
 
 vm.formData = {};
 
+
+//    Start here THursday/Friday
+//   BELOW
+//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 vm.uploadFile = function(file){
+  console.log('file:',  file);
+  console.log(vm.formData.profilePic);
     Upload.upload({
-      url: './views/images',
-      data: {file: file, 'username': vm.username}
+      url: '/register',
+      data: {file: file, 'username': vm.formData.username, password: vm.formData.password, about: vm.formData.about}
     })
     .then(function(response){
       console.log(response, 'uploaded', response.config.data.file.name, response.data);
@@ -27,31 +36,31 @@ vm.uploadFile = function(file){
 
   vm.registerUser = function() {
 
-    vm.uploadFile(vm.vile);
+    vm.uploadFile(vm.formData.profilePic);
 
 
-    var userData = {
-    username: vm.formData.username,
-    password: vm.formData.password,
-    about: vm.formData.about,
-    profilePic: vm.file
+  //   var userData = {
+  //   username: vm.formData.username,
+  //   password: vm.formData.password,
+  //   about: vm.formData.about,
+  //   profilePic: vm.formData.profilePic
+  //
+  // };  //end userData object
 
-  };  //end userData object
 
+// Save the user to the DB
 
-//Save the user to the DB
-
-$http.post('/register', userData).success(function(data){
-  console.log(userData);
-
-    vm.formData.username = "";
-    vm.formData.password = "";
-    vm.formData.about = "";
-    vm.formData.profilePic = "";
-})
-.error(function(data){
-  console.log('error posting new user', data);
-});
+// $http.post('/register', userData).success(function(data){
+//   console.log(userData);
+//
+//     vm.formData.username = "";
+//     vm.formData.password = "";
+//     vm.formData.about = "";
+//     vm.formData.profilePic = "";
+// })
+// .error(function(data){
+//   console.log('error posting new user', data);
+// });
 
 };
 

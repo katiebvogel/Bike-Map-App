@@ -73,7 +73,7 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/main', main);
 app.use('/profile', profile);
-app.use('/images', images); 
+// app.use('/images', images); 
 
 
 // we need to authenticate the users

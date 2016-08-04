@@ -9,12 +9,13 @@ router.get('/register', function(request, response){
   response.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
 
-router.post('/', function(request, response){
+router.post('/', images.single('file'), function(request, response){
+  console.log(request.file);
   User.create({
     username: request.body.username,
     password: request.body.password,
     about: request.body.about,
-    profilePic: request.body.profilePic
+    profilePic: request.file.filename
   }, function(err, user){
     if(err) {
       console.log(err);
