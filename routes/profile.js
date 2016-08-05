@@ -15,49 +15,87 @@ router.get('/profile', function(request, response){
 
 //this SHOULD? send to display the user's profile information on their page load after logging in
 router.get('/users', function(request, response){
-  User.find({}, function(error, user){
-  if(error) throw error;
-  console.log('user profile data', response);
-  response.send(user);
+  var userId = request.user._id;
+  var username = request.user.username;
+  var about = request.user.about;
+  var profilePic = request.user.profilePic;
+
+  console.log('This user id: ', userId,
+    'This user username: ', username,
+    'This user about: ', about,
+    'picture: ', profilePic);
+
+
+  User.findOne({_id: userId}, function(error, user){
+      if(error) throw error;
+      console.log('user profile data', user);
+      response.send(user);
 });
 });
 
 
 
 
-router.post('/bikeRoutes', images.single('file'), function(request, response){
+router.post('/', images.single('file'), function(request, response){
   console.log(request.file);
   // bikeRoute.create();
   // User.find({}).populate('routes').exec(function(err, user){
   //   console.log(user);
 
 // });
-
-
-bikeRoute.create({
+console.log('profile.js checking out the request body:', request.body);
+var routeObj = {
   startLocation: request.body.startLocation,
   endLocation: request.body.endLocation,
   comments: request.body.comments,
-  location: request.body.location,
-  photos: request.body.photos
-}, function(err, bikeRoute) {
-if(err){
-  console.log(err);
-  response.sendStatus(500);
-} else {
-  response.send(bikeRoute);
-}
-}); //end Route.create (for a new bike route to be entered into the DB)
-bikeRoute.save(function(err){
-  if(err){
-    console.log('error creating bike route', err);
-    response.sendStatus(500);
-  } else {
-    console.log('successfully saved new bike route');
-    response.sendStatus(200);
+  routePic: request.file.filename};
+
+bikeRoute.model.create(routeObj, function(error, bikeRoute) {
+
+  if (error) throw error;
+
+User.findOne({_id: request.user._id}, function(error, user){
+
+  console.log('this is the current user trying to add a bike route: ', user);
+  console.log('this is a route trying to be added', routeObj);
+  if(!user.routes){
+    user.routes = [];
   }
-});
+  user.routes.push(bikeRoute);
+
+  user.save(function(error){
+    if(error) throw error;
+  })
+}); //end user.findone
+}); //end Route.create (for a new bike route to be entered into the DB)
+
 }); //end router.post
+
+
+//here's the route that helps render saved bike routes on the user's page
+///
+
+// router.get('/routes', function(request, response){
+//   var userId = request.user._id;
+//   var startLocation = request.routes.startLocation;
+//   var endLocation = request.routes.endLocation;
+//   var comments = request.routes.comments;
+//
+//   console.log('This user id: ', userId,
+//     'This user startLocation: ', startLocation,
+//     'This user endLocation: ', endLocation,
+//     'comments: ', comments);
+//
+//
+//   bikeRoute.findOne({_id: userId}, function(error, route){
+//       if(error) throw error;
+//       console.log('user routes data', route);
+//       response.send(route);
+// });
+// });
+
+///  end the block about routing from the DB back to the controller to render saved bike routes on the page
+
 
 
 // router.put('/editWithId/:id/:routes?', function(request, response){

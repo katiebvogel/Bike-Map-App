@@ -1,17 +1,24 @@
 <div class="panel-body">
    <h1>Here are My Bike Routes and My Profile Info </h1>
- <div ng-repeat="bikeRoute in profile.bikeRoutes">
-   {{profile.bikeRoute}}
+
+ <div class = "well" ng-model = "profile.user">
+   <h1>  Welcome,  {{profile.username}} !</h1>
+  <h3>{{profile.about}}</h3>
+    <div id="profilePic" style: "width:100px; height:100px">
+      <img ng-src= "/images/{{profile.profilePic}}" style="width:150px; height: 100px"  />
+    </div>
  </div>
- <div class = "well" ng-repeat = "user in profile.user">
-  Welcome,  {{profile.user.username}} !
-  About: {{profile.user.about}}
- </div>
- <div class = "well">
+
+ <div class = "well" ng-model= "profile.user">
    <h2> Saved Bike Route Place Holder </h2>
    <p>
-     {{profile.message}}
+     {{profile.startLocation}}
+     {{profile.endLocation}}
+     {{profile.comments}}
    </p>
+   <div id="routePic" style: "width:100px; height:100px">
+     <img ng-src = "/images/{{profile.routePic}}" style: "width:100px; height:100px" />
+   </div>
  </div>
 </div>
 <div class = "col-md-8">
@@ -27,7 +34,7 @@
         <input type="text" class = "form-control" id="comments" ng-model = "profile.formData.comments" />
 
         <label for="images" id="routePic">Upload Photos of your route:  </label>
-        <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.profilePic" />
+        <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic" />
         <!-- <input type="submit" ng-click="uploadFile()" /> -->
 
           <label for="latitude">Latitude</label>

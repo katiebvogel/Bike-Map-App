@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 Schema = mongoose.Schema;
 
 var bikeRouteSchema = new Schema({
-  userID: Schema.Types.ObjectId,
+  userId: Schema.Types.ObjectId,
   startLocation: {type: String},
   endLocation: {type: String},
   comments: {type: String, required: false},
   location: {type: [Number]},  //[long, lat]
-  photos: {type: Array, required: false},
+  routePic: {type: Array, required: false},
   maps: {type: Array},
   user: {type: Schema.ObjectId, ref: 'User'}
 });

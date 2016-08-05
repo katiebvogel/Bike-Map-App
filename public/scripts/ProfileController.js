@@ -9,6 +9,8 @@ console.log('ProfileController is loaded');
 
 vm.message = "Profile stuff is beginning to work with angular"
 
+
+//below is our call to get the user information which will be displayed on profile page load.
 var userData = {};
 
 vm.getUserData = function(){
@@ -16,6 +18,11 @@ vm.getUserData = function(){
     function(response){
 
     console.log('getting profile data', response);
+    vm.username = response.data.username;
+    vm.about = response.data.about;
+    vm.profilePic = response.data.profilePic;
+
+    return(vm.username, vm.about, vm.profilePic);
 
   },
   function(response){
@@ -25,6 +32,10 @@ vm.getUserData = function(){
 };
 
 vm.getUserData();
+
+
+
+// ----  this is the end of the block that gets data from server for display on the page
 
 
 
@@ -65,15 +76,23 @@ vm.formData.longitude = -93.265;
 // });
 
 
+
+//uploading a new bike route on a user's profile  below ----
+// --- upload a new bike routePic
+
+
+
 vm.uploadFile = function(file){
   console.log('file: ', file);
   console.log(vm.formData.routePic);
   Upload.upload({
-    url: '/profile/bikeRoutes',
+    url: '/profile',
     data: {file: file, startLocation: vm.formData.startLocation, endLocation: vm.formData.endLocation, comments: vm.formData.comments}
-  })
-  .then(function(response){
-    console.log(response.config.file.name, response.data, 'uploaded');
+
+  }).then(function(response){
+    // console.log('joel log', response);
+    console.log('create route', response.data);
+    // console.log('uploaded', response.config.file.filename, response.data);
   },  function(response) {
     console.log(('Error uploading', response.status));
   });
@@ -82,9 +101,40 @@ vm.uploadFile = function(file){
 vm.newBikeRoute = function(){
 
 vm.uploadFile(vm.formData.routePic);
-}
+};
 
-});
+// end the block about adding a new bike route
+
+
+
+
+//begin a block that gets saved bike route information back on the user's profile //
+vm.getUserRoutes = function(){
+  $http.get('/profile/users').then(
+    function(response){
+
+    console.log('getting user saved route data', response);
+    vm.startLocation = response.data.routes[0].startLocation;
+    vm.endLocation = response.data.routes[0].endLocation;
+    vm.comments = response.data.routes[0].comments;
+    vm.routePic = response.data.routes[0].routePic[0];
+
+    return(vm.startLocation, vm.endLocation, vm.comments, vm.routePic);
+
+  },
+  function(response){
+    console.log('error getting user routes data', response);
+  });
+
+};
+
+vm.getUserRoutes();
+
+
+//end the block about getting bike route information back on user's profile
+
+
+});// end controller
 
 
 

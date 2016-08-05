@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
-var routeSchema = require('./route').schema;
+var bikeRouteSchema = require('./route').schema;
 
 
 //add to UserSchema later!
@@ -12,7 +12,7 @@ var UserSchema = new Schema({
   about: {type: String, required: false},
   profilePic: {type: Object, required: false },
   // location: {type: [Number]}, //[Long, Lat]
-  routes: [{type:Schema.ObjectId, ref: 'bikeRoute'}]
+  routes: [bikeRouteSchema]
 });
 
 UserSchema.pre('save', function(next){

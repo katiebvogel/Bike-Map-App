@@ -52,6 +52,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use('/views', express.static('views'));
+app.use('/images', express.static('images'));
 
 
 
