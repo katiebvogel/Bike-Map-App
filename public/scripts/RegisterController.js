@@ -22,7 +22,7 @@ vm.uploadFile = function(file){
       data: {file: file, 'username': vm.formData.username, password: vm.formData.password, about: vm.formData.about}
     })
     .then(function(response){
-      console.log(response, 'uploaded', response.config.data.file.name, response.data);
+      console.log( 'uploaded', response.config.data.file.name, response.data);
     }, function(response){
       console.log('Error uploading ', response.status);
 });

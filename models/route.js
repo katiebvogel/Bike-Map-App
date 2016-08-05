@@ -8,8 +8,8 @@ var bikeRouteSchema = new Schema({
   comments: {type: String, required: false},
   location: {type: [Number]},  //[long, lat]
   photos: {type: Array, required: false},
-  maps: {type: Array}
-
+  maps: {type: Array},
+  user: {type: Schema.ObjectId, ref: 'User'}
 });
 
 //indexes this schema as 2nd sphere for geolocation purposes..

@@ -3,21 +3,25 @@
 // var data = {};
 //
 // data.GetCurrent = GetCurrent;
-// data.GetAll = GetAll;
-// data.GetById = GetById;
-// data.GetByUsername = GetByUsername;
+// // data.GetAll = GetAll;
+// // data.GetById = GetById;
+// // data.GetByUsername = GetByUsername;
 //
-// function handleSuccess (response) {
-//   return response.data;
+// function handleSuccessGetCurrent(response) {
+//   console.log(response);
+//   data.user = response.data;
 // }
 //
 // function handleFailure(response){
-//   console.log('Error in userService call function ', response.data);
+//   console.log('Error in userService call function ');
 // }
 //
 // function GetCurrent(){
-//   return $http.get('/users/current').then(handleSuccess, handleFailure);
+//   return $http.get('/users').then(handleSuccessGetCurrent, handleFailure);
 // }
+//
+//
+// GetCurrent();
 //
 // return {
 //   data: data,

@@ -9,7 +9,7 @@ angular.module('bikeApp').controller('MainController', ['$http', '$location', fu
 
     vm.loginUser = function(){
       console.log('Username: ', vm.username);
-      console.log('Password: ', vm.password);
+
 
       var sendData = {};
 
@@ -22,11 +22,12 @@ angular.module('bikeApp').controller('MainController', ['$http', '$location', fu
     function handleSuccess(response) {
       console.log('Success', response);
       $location.path('/profile');
+      return vm.username;
     };
 
     function handleFailure(response){
       console.log('Failure', response);
-      vm.showError = true;
+      // vm.showError = true;
       alert('Not a match!  Try again or register.');
       $location.path('/main');
     };

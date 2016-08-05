@@ -17,7 +17,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('./models/user');
 var register = require('./routes/register');
 var login = require('./routes/login');
-var images = require('./routes/images');
 var main = require('./routes/main');
 var Route = require('./models/route');
 var profile = require('./routes/profile');
@@ -73,7 +72,7 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/main', main);
 app.use('/profile', profile);
-// app.use('/images', images); 
+// app.use('/images', images);
 
 
 // we need to authenticate the users
@@ -117,7 +116,7 @@ function(request, username, password, done){
 );
 
 // app.use(multer(
-//   {dest: './routes/images/'}
+//   {dest: 'images/'}
 // ));
 
 

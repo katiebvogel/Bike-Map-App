@@ -12,7 +12,7 @@ var UserSchema = new Schema({
   about: {type: String, required: false},
   profilePic: {type: Object, required: false },
   // location: {type: [Number]}, //[Long, Lat]
-  routes: [routeSchema]
+  routes: [{type:Schema.ObjectId, ref: 'bikeRoute'}]
 });
 
 UserSchema.pre('save', function(next){
