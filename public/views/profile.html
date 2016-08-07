@@ -4,22 +4,31 @@
  <div class = "well" ng-model = "profile.user">
    <h1>  Welcome,  {{profile.username}} !</h1>
   <h3>{{profile.about}}</h3>
-    <div id="profilePic" style: "width:100px; height:100px">
-      <img ng-src= "/images/{{profile.profilePic}}" style="width:150px; height: 100px"  />
+    <div id="profilePic">
+      <img ng-src= "/images/{{profile.profilePic}}" style="width: 150px; height: 100px"  />
     </div>
  </div>
 
- <div class = "well" ng-model= "profile.user">
-   <h2> Saved Bike Route Place Holder </h2>
-   <p>
-     {{profile.startLocation}}
-     {{profile.endLocation}}
-     {{profile.comments}}
-   </p>
-   <div id="routePic" style: "width:100px; height:100px">
-     <img ng-src = "/images/{{profile.routePic}}" style: "width:100px; height:100px" />
+ <div class = "well" ng-repeat= "route in profile.userRoutes track by $index">
+   <h2> My Saved Bike Routes </h2>
+    <div class = "well">
+
+      <p>Start: {{route.startLocation}}</p>
+      <p>End: {{route.endLocation}}</p>
+      <p>How I got there: {{route.comments}}</p>
+
+      <div id="routePic">
+     <img ng-src = "/images/{{route.routePic[0]}}"  style = "width: 200px; height: 250px" />
+    </div>
+    <div id="routePic">
+   <img ng-src = "/images/{{route.routePic[1]}}"  style = "width: 200px; height: 250px" />
+  </div>
+  <div id="routePic">
+ <img ng-src = "/images/{{route.routePic[2]}}"  style = "width: 200px; height: 250px" />
+</div>
    </div>
  </div>
+
 </div>
 <div class = "col-md-8">
   <div class = "panel panel-default">

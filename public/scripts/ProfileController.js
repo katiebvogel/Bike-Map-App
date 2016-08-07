@@ -11,7 +11,7 @@ vm.message = "Profile stuff is beginning to work with angular"
 
 
 //below is our call to get the user information which will be displayed on profile page load.
-var userData = {};
+// var userData = {};
 
 vm.getUserData = function(){
   $http.get('/profile/users').then(
@@ -112,14 +112,17 @@ vm.uploadFile(vm.formData.routePic);
 vm.getUserRoutes = function(){
   $http.get('/profile/users').then(
     function(response){
-
     console.log('getting user saved route data', response);
-    vm.startLocation = response.data.routes[0].startLocation;
-    vm.endLocation = response.data.routes[0].endLocation;
-    vm.comments = response.data.routes[0].comments;
-    vm.routePic = response.data.routes[0].routePic[0];
 
-    return(vm.startLocation, vm.endLocation, vm.comments, vm.routePic);
+    vm.userRoutes = response.data.routes;
+    console.log('userRoutes: ', vm.userRoutes);
+      return (vm.userRoutes);
+    // vm.startLocation = route.startLocation;
+    // vm.endLocation = route.endLocation;
+    // vm.comments = route.comments;
+    // vm.routePic = route.routePic[0];
+
+    // return(vm.startLocation, vm.endLocation, vm.comments, vm.routePic);
 
   },
   function(response){
