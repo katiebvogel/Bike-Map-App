@@ -22,10 +22,10 @@ router.get('/users', function(request, response){
   var about = request.user.about;
   var profilePic = request.user.profilePic;
 
-  console.log('This user id: ', vm.userId,
-    'This user username: ', username,
-    'This user about: ', about,
-    'picture: ', profilePic);
+  // console.log('This user id: ', vm.userId,
+  //   'This user username: ', username,
+  //   'This user about: ', about,
+  //   'picture: ', profilePic);
 
 
   User.findOne({_id: vm.userId}, function(error, user){
@@ -40,9 +40,7 @@ return vm.userId;
 
 
 router.post('/', images.single('file'), function(request, response){
-  // console.log(request.file);
-  //
-  // console.log('profile.js checking out the request body:', request.body);
+
   var routeObj = {
     startLocation: request.body.startLocation,
     endLocation: request.body.endLocation,
@@ -55,8 +53,7 @@ router.post('/', images.single('file'), function(request, response){
 
 User.findOne({_id: vm.userId}, function(error, user){
 
-  // console.log('this is the current user trying to add a bike route: ', user);
-  // console.log('this is a route trying to be added', routeObj);
+
   if(!user.routes){
     user.routes = [];
   }
@@ -70,6 +67,28 @@ User.findOne({_id: vm.userId}, function(error, user){
 
 }); //end router.post
 
+
+//Delete route below  ---
+router.delete('/removeWithId/:id', function(request, response){
+  var id = request.params.id;
+  console.log('here is the id of the route clicked:', id);
+
+  userRoute.findById(id, function(error, bikeRoute){
+    if(error) {
+    console.log('error finding by id for deletion', error);
+    response.sendStatus(500);
+  } else {
+    userRoute.remove(function(error){
+      if(error){
+        console.log('error actually deleting', error);
+        response.sendStatus(500);
+      }
+    })
+    console.log('you have successfully deleted the route: ', id);
+    response.sendStatus(200);
+  }
+  })
+});  //end router.delete
 
 
 

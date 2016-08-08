@@ -39,12 +39,37 @@ vm.getUserData();
 // ----  this is the end of the block that gets data from server for display on the page
 
 //block below to display simple map on a click next to create a new bike route form
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
 var map;
 vm.initMap = function() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+   var chicago = new google.maps.LatLng(44.978, -93.265);
+   var mapOptions = {
+     zoom:7,
+     center: chicago
+   }
+   map = new google.maps.Map(document.getElementById('map'), mapOptions);
+   directionsDisplay.setMap(map);
+ }
+  // map = new google.maps.Map(document.getElementById('map'), {
+  //   center: {lat: 44.978, lng: -93.265},
+  //   zoom: 8
+  // });
+// };
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 44.978, lng: -93.265},
-    zoom: 8
+vm.calcRoute = function() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+    origin: start,
+    destination: end,
+    travelMode: 'BICYCLING'
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+      directionsDisplay.setDirections(result);
+    }
   });
 };
 
@@ -95,19 +120,14 @@ vm.uploadFile = function(file){
     data: {file: file, startLocation: vm.formData.startLocation, endLocation: vm.formData.endLocation, comments: vm.formData.comments}
 
   }).then(function(response){
-    // console.log('joel log', response);
     console.log('create route', response.data);
-    // console.log('uploaded', response.config.file.filename, response.data);
   },  function(response) {
     console.log(('Error uploading', response.status));
   });
 };
 
 vm.newBikeRoute = function(){
-
 vm.uploadFile(vm.formData.routePic);
-
-
 };
 
 // end the block about adding a new bike route
@@ -137,6 +157,21 @@ vm.getUserRoutes();
 
 
 //end the block about getting bike route information back on user's profile
+
+
+//add a delete route function and button
+// vm.removeAction = function(userRouteId){
+//   console.log('you chose to remove');
+//   $http.delete('/profile/removeWithId/' + bikeRoute.model._id ).then(function(response){
+//     vm.userRoute = response.data;
+//   }, function(response){
+//     console.log('failure deleting');
+//   })
+// } ;  //end remove button click function
+
+
+
+
 
 // try to get a map to display on Create New Route form panel
 
