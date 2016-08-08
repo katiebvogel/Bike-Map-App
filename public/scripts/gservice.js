@@ -1,5 +1,8 @@
 // angular.module('bikeApp').factory('gservice', function($rootScope, $http){
 //
+//
+//
+//
 // var googleMapService = {};
 // googleMapService.clickLat = 0;
 // googleMapService.clickLong = 0;
@@ -19,8 +22,8 @@
 //   selectedLat = latitude;
 //   selectedLong = longitude;
 //
-//   $http.get('/users').success(function(response){
-//     console.log('http.get in gservice:', response.user);
+//   $http.get('/').success(function(response){
+//     console.log('http.get in gservice:', response);
 //     locations = convertToMapPoints(response);
 //
 //     initialize(latitude, longitude);

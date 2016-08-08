@@ -4,6 +4,7 @@ angular.module('bikeApp').controller('MainController', ['$http', '$location', fu
     // vm.showError = false;
     vm.username = '';
     vm.password = '';
+  
 
     vm.message = "Angular working on Bike App So far"
 

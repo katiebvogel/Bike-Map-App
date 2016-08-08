@@ -15,7 +15,7 @@ router.get('/profile', function(request, response){
 });
 
 
-//this SHOULD? send to display the user's profile information on their page load after logging in
+//this SHOULD send to display the user's profile information on their page load after logging in
 router.get('/users', function(request, response){
   vm.userId = request.user._id;
   var username = request.user.username;

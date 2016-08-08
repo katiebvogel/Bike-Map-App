@@ -3,11 +3,12 @@
 //gservice, userService?
 
 
-console.log('ProfileController is loaded');
+// console.log('ProfileController is loaded');
 
   var vm = this;
 
-vm.message = "Profile stuff is beginning to work with angular"
+  vm.active = true;
+
 
 
 //below is our call to get the user information which will be displayed on profile page load.
@@ -37,9 +38,17 @@ vm.getUserData();
 
 // ----  this is the end of the block that gets data from server for display on the page
 
+//block below to display simple map on a click next to create a new bike route form
+var map;
+vm.initMap = function() {
 
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 44.978, lng: -93.265},
+    zoom: 8
+  });
+};
 
-
+//end block about displaying a google map
 
 vm.formData = {};
 
@@ -52,8 +61,8 @@ var long = 0;
 vm.formData.latitude = 44.978;
 vm.formData.longitude = -93.265;
 
-//get the user's actual coordinates based on HTML5 window load
-
+// //get the user's actual coordinates based on HTML5 window load
+//
 // geolocation.getLocation().then(function(data){
 //
 //   //set the lat and long to the loaded actual HTML5 coords
@@ -64,9 +73,9 @@ vm.formData.longitude = -93.265;
 //   gservice.refresh(vm.formData.latitude, vm.formData.longitude);
 //
 // });
-
-//now to actually listen for that "CLICK"
-
+//
+// //now to actually listen for that "CLICK"
+//
 // $rootScope.$on("clicked", function(){
 //   vm.$apply(function(){
 //
@@ -75,10 +84,6 @@ vm.formData.longitude = -93.265;
 //   });
 // });
 
-
-
-//uploading a new bike route on a user's profile  below ----
-// --- upload a new bike routePic
 
 
 
@@ -101,6 +106,8 @@ vm.uploadFile = function(file){
 vm.newBikeRoute = function(){
 
 vm.uploadFile(vm.formData.routePic);
+
+
 };
 
 // end the block about adding a new bike route
@@ -117,17 +124,12 @@ vm.getUserRoutes = function(){
     vm.userRoutes = response.data.routes;
     console.log('userRoutes: ', vm.userRoutes);
       return (vm.userRoutes);
-    // vm.startLocation = route.startLocation;
-    // vm.endLocation = route.endLocation;
-    // vm.comments = route.comments;
-    // vm.routePic = route.routePic[0];
-
-    // return(vm.startLocation, vm.endLocation, vm.comments, vm.routePic);
 
   },
   function(response){
     console.log('error getting user routes data', response);
   });
+
 
 };
 
@@ -136,44 +138,53 @@ vm.getUserRoutes();
 
 //end the block about getting bike route information back on user's profile
 
+// try to get a map to display on Create New Route form panel
+
+
+
+
+// navigator.geolocation;
+// navigator.geolocation.getCurrentPosition();
+// var latitude = position.coords.latitude;
+// var longitude = position.coords.longitude;
+// var map;
+//
+//         function initMap() {
+//             map = new google.maps.Map(document.getElementById('map'), {
+//                 center: {
+//                     lat: 44.9778,	//	Default Minneapolis centered
+//                     lng: -93.2650
+//                 },
+//                 zoom: 10,
+//                 disableDefaultUI: true,	// gets rid of google zoom and street view buttons
+//
+// // var infoWindow = new google.maps.InfoWindow({map: map}); commented out to get rid of ugly popup
+//
+//             // Try HTML5 geolocation.
+//             if (navigator.geolocation) {
+//                 navigator.geolocation.getCurrentPosition(function(position) {
+//                     var pos = {
+//                         lat: position.coords.latitude,
+//                         lng: position.coords.longitude
+//                     };
+//
+//                     // infoWindow.setPosition(pos);
+//                     // infoWindow.setContent('Location found.');
+//                     map.setCenter(pos);
+//                 }, function() {
+//                     handleLocationError(true, infoWindow, map.getCenter());
+//                 });
+//             } else {
+//                 // Browser doesn't support Geolocation
+//                 handleLocationError(false, infoWindow, map.getCenter());
+//             }
+//         }
+//
+//         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//             infoWindow.setPosition(pos);
+//             infoWindow.setContent(browserHasGeolocation ?
+//                 'Error: The Geolocation service failed.' :
+//                 'Error: Your browser doesn\'t support geolocation.');
+//         }
 
 });// end controller
-
-
-
-
-//   var bikeRoute = {
-//     start: vm.formData.startLocation,
-//     finish: vm.formData.endLocation,
-//     message: vm.formData.comments,
-//     location: [vm.formData.longitude, vm.formData.latitude],
-//     photos: vm.file
-//   };
-//
-// $http.post('/', bikeRoute).success(function(data){
-//   console.log('logging for the http post in profile controller: ', bikeRoute.username)
-// });
-// };
-// });
-  // vm.formData.startLocation = "";
-  // vm.formData.endLocation = "";
-  // vm.formData.comments = "";
-  // vm.formData.photos = "";
-
-  // gservice.refresh(vm.formData.latitude, vm.formData.longitude);
-// });
-// .error(function(data){
-//   console.log('error posting new bike route to DB', data);
-
-
- //end new bikeroute function
-//
-// $http.get('/profile', bikeRoute).then(function(response){
-//   console.log(response);
-//   vm.routes = ('My Routes.  Starting from: ', response.data.startLocation, ' to: ', response.data.endLocation, '. Here are my comments abou the trip: ', response.data.comments, '. ');
-//   return vm.routes;
-// });
-
-// });
-
-// });  // end controller
