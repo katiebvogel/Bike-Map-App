@@ -2,21 +2,13 @@
 
 //gservice, userService?
 
-
-// console.log('ProfileController is loaded');
-
   var vm = this;
   //use vm.active = true in order to keep the saved routes in a collapsed state on page load
   vm.active = true;
   vm.formData = {};
-
-// var coords = {};
-// var lat = 0;
-// var long = 0;
+  vm.profilePic = [];
 
 //below is our call to get the user information which will be displayed on profile page load.
-
-
 vm.getUserData = function(){
   $http.get('/profile/users').then(
     function(response){
@@ -27,12 +19,10 @@ vm.getUserData = function(){
     vm.profilePic = response.data.profilePic;
 
     return(vm.username, vm.about, vm.profilePic);
-
   },
   function(response){
     console.log('error getting profile data', response);
   });
-
 };
 
 vm.getUserData();
@@ -60,7 +50,6 @@ vm.initMap = function() {
           var directionsService = new google.maps.DirectionsService;
 
           // Create a map and center it on Minneapolis
-
           map = new google.maps.Map(document.getElementById('map'), {
               zoom:7,
               center: {lat: 44.978, lng: -93.265}
@@ -101,8 +90,6 @@ vm.initMap = function() {
             // Route the directions and pass the response to a function to create
             // markers for each step.
             if (status === 'OK') {
-              // document.getElementById('warnings_panel').innerHTML =
-              //     '<b>' + response.routes[0].warnings + '</b>';
               directionsDisplay.setDirections(response);
               showSteps(response, markerArray, stepDisplay, map);
             } else {
@@ -122,23 +109,16 @@ vm.initMap = function() {
             marker.setPosition(myRoute.steps[i].start_location);
             attachInstructionText(
                 stepDisplay, marker, myRoute.steps[i].instructions, map);
-                // console.log('these are the steps', myRoute.steps);
-                vm.directionsPanel = myRoute.steps;
-                console.log('these are the steps', vm.directionsPanel.object[i].instructions);
           }
-          // return(vm.directionsPanel.object[i].instructions);
         }
 
         function attachInstructionText(stepDisplay, marker, text, map) {
           google.maps.event.addListener(marker, 'click', function() {
-            // Open an info window when the marker is clicked on, containing the text
-            // of the step.
+            // Open an info window when the marker is clicked on, containing the text of the step.
             stepDisplay.setContent(text);
             stepDisplay.open(map, marker);
-
           });
         }
-
 
 //end block about displaying a google map that allows for a search and display
 
@@ -206,7 +186,6 @@ vm.getUserRoutes = function(){
     vm.userRoutes = response.data.routes;
     console.log('userRoutes: ', vm.userRoutes);
       return (vm.userRoutes);
-
   },
   function(response){
     console.log('error getting user routes data', response);

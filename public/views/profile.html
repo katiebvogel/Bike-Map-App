@@ -38,12 +38,12 @@
    </div>
  </div>
       <div class = "row">
-
+        <div id= "newRoute">
          <div class = "col-md-4">
            <div class = "panel panel-default" style: "float: left">
              <form name = "newBikeRouteForm" enctype = "multipart/form-data" novalidate>
                <div class = "form-group">
-                 <h1>Add a New Bike Route!</h1>
+                 <h1>Improve Bike Route</h1>
                  <label for="startLocation">Start Location: </label>
                  <input type="text" class = "form-control" id="startLocation" ng-model = "profile.formData.startLocation" />
                  <label for="endLocation">End Location: </label>
@@ -63,11 +63,11 @@
               <div class = "panel">
                 <div id="map" style="float:left; width:400px; height:400px"></div>
                 <div id="directionsPanel" style="float: right; width:350px; height:400px; overflow: auto">
-
+                 <button ng-click= "profile.saveMap()" >Save Map and Directions</button>
                 </div>
               </div>
                 <button class = "btn btn-success btn-md" ng-click="profile.initMap()">New Map</button>
-              <div>
+              <div id="locationSelection">
                 <strong>Start: </strong>
                 <select id="start" ng-model = "profile.start" ng-change="profile.calcRoute();">
                   <option value="minneapolis, mn"> </option>
@@ -101,4 +101,20 @@
 
               </div>
            </div>
+         </div>
       </div>
+    <div class="container">
+     <div class="row">
+      <div class="span12">
+       <div id="footer">
+
+          <ul class="footer">
+
+           <li>Application built by Katie Vogel</li>
+           <li>Email:katiebvogel@gmail.com</li>
+          <ul>
+
+       </div>
+    </div>
+ </div>
+</div>
