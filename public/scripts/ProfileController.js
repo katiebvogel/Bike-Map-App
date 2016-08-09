@@ -50,6 +50,8 @@ var map;
 var stepDisplay;
 var markerArray = [];
 var mapOptions = {};
+var myRoute = [];
+vm.directionsPanel = [];
 
 vm.initMap = function() {
   var markerArray = [];
@@ -66,7 +68,7 @@ vm.initMap = function() {
 
           // Create a renderer for directions and bind it to the map.
           var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
-
+          directionsDisplay.setPanel(document.getElementById('directionsPanel'));
           // Instantiate an info window to hold step text.
           var stepDisplay = new google.maps.InfoWindow;
 
@@ -120,7 +122,11 @@ vm.initMap = function() {
             marker.setPosition(myRoute.steps[i].start_location);
             attachInstructionText(
                 stepDisplay, marker, myRoute.steps[i].instructions, map);
+                // console.log('these are the steps', myRoute.steps);
+                vm.directionsPanel = myRoute.steps;
+                console.log('these are the steps', vm.directionsPanel.object[i].instructions);
           }
+          // return(vm.directionsPanel.object[i].instructions);
         }
 
         function attachInstructionText(stepDisplay, marker, text, map) {
@@ -129,8 +135,10 @@ vm.initMap = function() {
             // of the step.
             stepDisplay.setContent(text);
             stepDisplay.open(map, marker);
+
           });
         }
+
 
 //end block about displaying a google map that allows for a search and display
 

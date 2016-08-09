@@ -36,10 +36,11 @@
        </div>
      </div>
    </div>
+ </div>
       <div class = "row">
 
          <div class = "col-md-4">
-           <div class = "panel panel-default">
+           <div class = "panel panel-default" style: "float: left">
              <form name = "newBikeRouteForm" enctype = "multipart/form-data" novalidate>
                <div class = "form-group">
                  <h1>Add a New Bike Route!</h1>
@@ -61,28 +62,43 @@
             <div class = "col-md-8 ">
               <div class = "panel">
                 <div id="map" style="float:left; width:400px; height:400px"></div>
-                <div id="directionsPanel" style="float:right; width:100px;height 400px"></div>
-                <div id="warnings_panel">
-                  
-                </div>
+                <div id="directionsPanel" style="float: right; width:350px; height:400px; overflow: auto">
 
                 </div>
+              </div>
                 <button class = "btn btn-success btn-md" ng-click="profile.initMap()">New Map</button>
-                <div>
+              <div>
                 <strong>Start: </strong>
                 <select id="start" ng-model = "profile.start" ng-change="profile.calcRoute();">
                   <option value="minneapolis, mn"> </option>
                     <option value="minneapolis, mn">Minneapolis</option>
+                    <option value="duluth, mn">Duluth</option>
                     <option value="st paul, mn">St Paul</option>
+                    <option value="bloomington, mn">Bloomington</option>
+                    <option value="st anthony main, minneapolis, mn">St Anthony Main</option>
+                    <option value="university of minnesota, twin cities, mn">U of M</option>
+                    <option value="lake of the isles, minneapolis, mn">Lake of the Isles</option>
+                    <option value="lake calhoun, minneapolis, mn">Lake Calhoun</option>
+                    <option value="st louis park, mn">SLP</option>
+                    <option value="cedar lake, minneapolis, mn">Cedar Lake</option>
+
                   </select>
                   <strong>End: </strong>
                   <select id="end" ng-model="profile.end" ng-change="profile.calcRoute();">
                     <option value="st paul, mn"></option>
-                    <option value="st paul, mn">St Paul</option>
                     <option value="minneapolis, mn">Minneapolis</option>
+                    <option value="duluth, mn">Duluth</option>
+                    <option value="st paul, mn">St Paul</option>
+                    <option value="bloomington, mn">Bloomington</option>
+                    <option value="st anthony main, minneapolis,  mn">St Anthony Main</option>
+                    <option value="university of minnesota, twin cities, mn">U of M</option>
+                    <option value="lake of the isles, minneapolis, mn">Lake of the Isles</option>
+                    <option value="lake calhoun, minneapolis, mn">Lake Calhoun</option>
+                    <option value="st louis park, mn">SLP</option>
+                    <option value="cedar lake, minneapolis, mn">Cedar Lake</option>
+
                   </select>
 
               </div>
            </div>
       </div>
-    </div>
