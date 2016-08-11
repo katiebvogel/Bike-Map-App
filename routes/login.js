@@ -4,8 +4,6 @@ var passport = require('passport');
 var path = require('path');
 var mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost/users');
-
 
 router.get('/', function(request, response){
   console.log('Here is a message from login.js router');

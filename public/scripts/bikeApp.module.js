@@ -1,1 +1,2 @@
-angular.module('bikeApp', ['ngRoute', 'ngFileUpload', 'geolocation']);
+angular.module('bikeApp', ['ngRoute', 'ngFileUpload', 'geolocation', ]);
+// 'ngDialog'

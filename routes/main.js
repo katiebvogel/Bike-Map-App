@@ -6,8 +6,7 @@ var router = require('express').Router();
 router.get('/', function(request, response){
 
   //let's see what it looks like to Get a user with a route associated
-  console.log('Requesting user', request.user);
-
+  // console.log('Requesting user', request.user);
 
   var query = User.find({});
   query.exec(function(error, users){

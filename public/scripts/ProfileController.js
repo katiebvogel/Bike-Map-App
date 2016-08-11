@@ -1,7 +1,5 @@
  angular.module('bikeApp').controller('ProfileController', function($http, $location, Upload, $rootScope, geolocation){
 
-//gservice, userService?
-
   var vm = this;
   //use vm.active = true in order to keep the saved routes in a collapsed state on page load
   vm.active = true;
@@ -122,34 +120,7 @@ vm.initMap = function() {
 
 
 
-
-
-// //get the user's actual coordinates based on HTML5 window load
-//
-// geolocation.getLocation().then(function(data){
-//
-//   //set the lat and long to the loaded actual HTML5 coords
-//
-//   vm.formData.longitude = parseFloat(coords.long).toFixed(3);
-//   parseFloat(coords.lat).toFixed(3);
-//
-//   gservice.refresh(vm.formData.latitude, vm.formData.longitude);
-//
-// });
-//
-// //now to actually listen for that "CLICK"
-//
-// $rootScope.$on("clicked", function(){
-//   vm.$apply(function(){
-//
-//     vm.formData.latitude = parseFloat(gservice.clickLat).toFixed(3);
-//     vm.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);
-//   });
-// });
-
-
-
-
+ //below is a block for uploading a new bikeRoute
 vm.uploadFile = function(file){
   console.log('file: ', file);
   console.log(vm.formData.routePic1);
@@ -176,10 +147,12 @@ vm.getUserRoutes = function(){
   $http.get('/profile/users').then(
     function(response){
     console.log('getting user saved route data', response);
+    userRoutes = response.data.routes;
 
-    vm.userRoutes = response.data.routes;
-    console.log('userRoutes: ', vm.userRoutes);
-      return (vm.userRoutes);
+vm.userRoutes = userRoutes.map(function(route){
+      route.editing = false;
+      return route;
+    });
   },
   function(response){
     console.log('error getting user routes data', response);
@@ -190,11 +163,41 @@ vm.getUserRoutes();
 
 
 
+//this small action allows the edit button to make the bike route editable
+
+vm.editAction = function(route){
+  route.editing= !route.editing;
+  console.log('you are choosing to edit', route);
+};  //end the block about making the bikeroute editable via the orange "edit" button
+
+
+
+
+
+//below is the action to actually SAVE the update to the route that has been updated on the DOM
+
+vm.saveUpdatesAction = function(route){
+console.log(route);
+var sendData ={};
+sendData.route = route;
+$http.put('/profile/updateWithId/' + route._id, sendData).then(function(response){
+  vm.route = response.data;
+  console.log('here is the info sent back via the router when we wanted to update', response);
+}, function(response){
+  console.log('failure updating', response);
+})
+
+}; //end block for saving updates to routes.
+
+
+
+
+
 
 // add a delete route function and button
 vm.removeAction = function(route){
   console.log('you chose to remove', route);
-  $http.delete('/profile/removeWithId/' + route ).then(function(response){
+  $http.put('/profile/removeWithId/' + route ).then(function(response){
     vm.route = response.data;
     console.log(response);
   }, function(response){

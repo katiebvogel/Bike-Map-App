@@ -4,18 +4,14 @@ angular.module('bikeApp').controller('MainController', ['$http', '$location', fu
     // vm.showError = false;
     vm.username = '';
     vm.password = '';
-  
 
     vm.loginUser = function(){
-      console.log('Username: ', vm.username);
-
-
+      // console.log('Username: ', vm.username);
       var sendData = {};
-
       sendData.username = vm.username;
       sendData.password = vm.password;
 
-      $http.post('/login', sendData).then(handleSuccess, handleFailure);
+    $http.post('/login', sendData).then(handleSuccess, handleFailure);
     };
 
     function handleSuccess(response) {

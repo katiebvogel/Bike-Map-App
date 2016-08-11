@@ -10,9 +10,9 @@
         <input type="text" class = "form-control" id="about" ng-model = "register.formData.about" />
 
         <label for="text" id="profilePic" readonly>Load Profile Picture</label>
-        <input type="file" ngf-select name = "file" ngf-pattern="image/*" accept= "image/*"  ng-model="register.formData.profilePic"/>
-        <!-- <input type="submit" ng-click="uploadFile()" /> -->
-      </div>
+        <input type="file" ngf-select name = "file" ngf-pattern="image/*" accept= "image/*" ngf-fix-orientation="true" ng-model="register.formData.profilePic"/>
+
+       </div>
         <button type="submit" class= "btn btn-danger btn-md" ng-click="register.registerUser()">Submit Registration</button>
     </form>
   </div>

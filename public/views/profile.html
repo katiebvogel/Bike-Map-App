@@ -16,6 +16,8 @@
  </div>
    <div class = "container">
 
+
+
        <h2> My Saved Bike Routes </h2>
        <div class="expandcollapse-item">
        <button ng-click="active = !active" class = "btn btn-primary btn-lg active">See/Hide Routes</button>
@@ -28,36 +30,38 @@
                <div class = "well">
                  <div class = "row">
 
-                 <div class = "col-md-2"><h3>Start: {{route.startLocation}}</h3></br>
-                 <h3>End: {{route.endLocation}}</h3>
-                </div>
-                <div class = "col-md-6">
-                 <h3>How I got there: </h3> <p>{{route.comments}}</p>
-               </div>
-                 <div clas="col-md-4" id="routePic1">
-                   <img ng-src = "/images/{{route.routePic1[0]}}"  style = "width: 250px; height: 250px" />
-                 </div>
 
-                 <!-- <div id="routePic2">
-                   <img ng-src = "/images/{{route.routePic2[0]}}"  style = "width: 200px; height: 250px" />
-                 </div>
-                 <div id="routePic3">
-                   <img ng-src = "/images/{{route.routePic3[0]}}"  style = "width: 200px; height: 250px" />
-                 </div>
-                 <div id="routePic4">
-                   <img ng-src = "/images/{{route.routePic4[0]}}"  style = "width: 200px; height: 250px" />
-                 </div> -->
-                   <button ng-click= "profile.removeAction(route._id)" ng-model = "route" class = "btn btn-danger btn-sm active">Delete</button>
-                 </div>
+                <button ng-click= "profile.editAction(route)"  class = "btn btn-warning btn-lg active">Edit</button>
+
+                     <div class = "col-md-2">
+                       <h3>Start: {{route.startLocation}}</h3></br>
+                       <input type= "text"  ng-model = "route.startLocation" ng-show="route.editing" />
+
+                       <h3>End: {{route.endLocation}}</h3>
+                       <input type= "text"  ng-model = "route.endLocation" ng-show="route.editing" />
+                     </div>
+                     <div class = "col-md-6" >
+                       <h3>How I got there: </h3> <p>{{route.comments}}</p>
+                       <input type= "text"  ng-model = "route.comments" ng-show="route.editing" />
+                     </div>
+
+                     <div clas="col-md-4" id="routePic1">
+                       <img ng-src = "/images/{{route.routePic1[0]}}"  style = "width: 250px; height: 250px" />
+                     </div>
+
+                     <button ng-click= "profile.removeAction(route._id)" ng-model = "route" class = "btn btn-danger btn-md active">Delete</button>
+                     <button ng-show="route.editing" ng-click= "profile.saveUpdatesAction(route)"  class = "btn btn-success btn-md active">Save Updates</button>
                </div>
              </div>
-
            </div>
+          </div>
          </div>
        </div>
      </div>
    </div>
- </div>
+
+
+
       <div class = "row">
         <div id= "newRoute">
          <div class = "col-md-4">
@@ -73,15 +77,7 @@
                  <input type="text" class = "form-control" rows = "3" id="comments" ng-model = "profile.formData.comments" />
 
                  <label for="images" id="routePic1">Upload Photos of your route:  </label>
-                 <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic1" />
-<!--
-                 <label for="images" id="routePic2">Upload Photos of your route:  </label>
-                 <input type= "file" ngf-select name= "file2" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic2" />
-                 <label for="images" id="routePic3">Upload Photos of your route:  </label>
-                 <input type= "file" ngf-select name= "file3" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic3" />
-                 <label for="images" id="routePic4">Upload Photos of your route:  </label>
-                 <input type= "file" ngf-select name= "file4" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic4" /> -->
-
+                 <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic1" ngf-fix-orientation="true" />
                </div>
                <button type="submit" class= "btn btn-danger btn-md" ng-click="profile.newBikeRoute()">Save Bike Route</button>
              </form>

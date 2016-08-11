@@ -10,7 +10,7 @@ router.get('/register', function(request, response){
 });
 
 router.post('/', images.single('file'), function(request, response){
-  console.log(request.file);
+  // console.log(request.file);
   User.create({
     username: request.body.username,
     password: request.body.password,
