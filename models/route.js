@@ -7,7 +7,10 @@ var bikeRouteSchema = new Schema({
   endLocation: {type: String},
   comments: {type: String, required: false},
   location: {type: [Number]},  //[long, lat]
-  routePic: {type: Array, required: false},
+  routePic1: {type: Array, required: false},
+  // routePic2: {type: Array, required: false},
+  // routePic3: {type: Array, required: false},
+  // routePic4: {type: Array, required: false},
   maps: {type: Array},
   user: {type: Schema.ObjectId, ref: 'User'}
 });

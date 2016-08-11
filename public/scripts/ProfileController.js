@@ -12,12 +12,10 @@
 vm.getUserData = function(){
   $http.get('/profile/users').then(
     function(response){
-
     console.log('getting profile data', response);
     vm.username = response.data.username;
     vm.about = response.data.about;
     vm.profilePic = response.data.profilePic;
-
     return(vm.username, vm.about, vm.profilePic);
   },
   function(response){
@@ -27,8 +25,6 @@ vm.getUserData = function(){
 
 vm.getUserData();
 // ----  this is the end of the block that gets data from server for display on the page
-
-
 
 
 
@@ -156,28 +152,26 @@ vm.initMap = function() {
 
 vm.uploadFile = function(file){
   console.log('file: ', file);
-  console.log(vm.formData.routePic);
+  console.log(vm.formData.routePic1);
   Upload.upload({
     url: '/profile',
     data: {file: file, startLocation: vm.formData.startLocation, endLocation: vm.formData.endLocation, comments: vm.formData.comments}
-
   }).then(function(response){
     console.log('create route', response.data);
   },  function(response) {
     console.log(('Error uploading', response.status));
   });
 };
-
 vm.newBikeRoute = function(){
-vm.uploadFile(vm.formData.routePic);
+vm.uploadFile(vm.formData.routePic1);
 };
-
 // end the block about adding a new bike route
 
 
 
 
 //begin a block that gets saved bike route information back on the user's profile //
+
 vm.getUserRoutes = function(){
   $http.get('/profile/users').then(
     function(response){
@@ -192,22 +186,48 @@ vm.getUserRoutes = function(){
   });
 };
 vm.getUserRoutes();
-
 //end the block about getting bike route information back on user's profile
 
 
 
 
-//add a delete route function and button
-// vm.removeAction = function(userRouteId){
-//   console.log('you chose to remove');
-//   $http.delete('/profile/removeWithId/' + bikeRoute.model._id ).then(function(response){
-//     vm.userRoute = response.data;
-//   }, function(response){
-//     console.log('failure deleting');
-//   })
-// } ;  //end remove button click function
+// add a delete route function and button
+vm.removeAction = function(route){
+  console.log('you chose to remove', route);
+  $http.delete('/profile/removeWithId/' + route ).then(function(response){
+    vm.route = response.data;
+    console.log(response);
+  }, function(response){
+    console.log('failure deleting');
+  })
+};
+   //end remove button click function
 
+
+
+// add a LOOKUP routes function and button
+//first, send the data that is being used for the search
+vm.startSearch = '';
+vm.endSearch = '';
+
+vm.searchAction = function(){
+  console.log('startSearch', vm.startSearch);
+  var sendData = {};
+  sendData.startSearch = vm.startSearch;
+  sendData.endSearch = vm.endSearch;
+
+ $http.put('/profile/keywordsearch', sendData).then(handleSuccess, handleFailure);
+  console.log('you chose to lookup routes', sendData);
+
+};//end searchbutton click function
+
+function handleSuccess(response) {
+  console.log('Success posting the keyword search', response);
+  vm.searchRoutes = response.data;
+};
+function handleFailure(response) {
+  console.log('Failure posting to the keyword search', response);
+};
 
 
 

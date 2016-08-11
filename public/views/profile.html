@@ -1,33 +1,54 @@
 <div class="panel-body">
+  <div class = "well">
    <h1>Here are My Bike Routes and My Profile Info </h1>
 
-   <div class = "well" ng-model = "profile.user">
-     <h1>  Welcome,  {{profile.username}} !</h1>
-      <h3>{{profile.about}}</h3>
-      <div id="profilePic">
-      <img ng-src= "/images/{{profile.profilePic}}" style="width: 150px; height: 100px"  />
-      </div>
-   </div>
+   <div class = "well" style = "col-md-7" ng-model = "profile.user">
+     <div class = "row">
 
+     <div class= "col-md-2"><h1>{{profile.username}}</h1></div>
+     <div class = "col-md-3"><h3>{{profile.about}}</h3></div>
+      <div class = "col-md-3" id="profilePic">
+      <img ng-src= "/images/{{profile.profilePic}}" style="width: 250px; height: 250px"  />
+      <!-- <img src="/vendors/bicycle.jpg" class="bg" alt="Responsive image"> -->
+      </div>
+    </div>
+   </div>
+ </div>
    <div class = "container">
-     <h2> My Saved Bike Routes </h2>
-     <div class="expandcollapse-item">
-       <button ng-click="active = !active" >See Routes</button>
+
+       <h2> My Saved Bike Routes </h2>
+       <div class="expandcollapse-item">
+       <button ng-click="active = !active" class = "btn btn-primary btn-lg active">See/Hide Routes</button>
+
        <div ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
 
          <div class="slideDown" ng-show="active">
            <div class="expand-collapse-content">
              <div class = "well" ng-repeat= "route in profile.userRoutes track by $index">
                <div class = "well">
+                 <div class = "row">
 
-                 <p>Start: {{route.startLocation}}</p>
-                 <p>End: {{route.endLocation}}</p>
-                 <p>How I got there: {{route.comments}}</p>
-
-                 <div id="routePic">
-                   <img ng-src = "/images/{{route.routePic[0]}}"  style = "width: 200px; height: 250px" />
+                 <div class = "col-md-2"><h3>Start: {{route.startLocation}}</h3></br>
+                 <h3>End: {{route.endLocation}}</h3>
+                </div>
+                <div class = "col-md-6">
+                 <h3>How I got there: </h3> <p>{{route.comments}}</p>
+               </div>
+                 <div clas="col-md-4" id="routePic1">
+                   <img ng-src = "/images/{{route.routePic1[0]}}"  style = "width: 250px; height: 250px" />
                  </div>
-                   <button ng-click= "profile.removeAction(item._id)" ng-model = "route">Delete</button>
+
+                 <!-- <div id="routePic2">
+                   <img ng-src = "/images/{{route.routePic2[0]}}"  style = "width: 200px; height: 250px" />
+                 </div>
+                 <div id="routePic3">
+                   <img ng-src = "/images/{{route.routePic3[0]}}"  style = "width: 200px; height: 250px" />
+                 </div>
+                 <div id="routePic4">
+                   <img ng-src = "/images/{{route.routePic4[0]}}"  style = "width: 200px; height: 250px" />
+                 </div> -->
+                   <button ng-click= "profile.removeAction(route._id)" ng-model = "route" class = "btn btn-danger btn-sm active">Delete</button>
+                 </div>
                </div>
              </div>
 
@@ -49,10 +70,18 @@
                  <label for="endLocation">End Location: </label>
                  <input type="text" class = "form-control" id="endLocation" ng-model = "profile.formData.endLocation" />
                  <label for="comments">Tell us about your bike route: </label>
-                 <input type="text" class = "form-control" id="comments" ng-model = "profile.formData.comments" />
+                 <input type="text" class = "form-control" rows = "3" id="comments" ng-model = "profile.formData.comments" />
 
-                 <label for="images" id="routePic">Upload Photos of your route:  </label>
-                 <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic" />
+                 <label for="images" id="routePic1">Upload Photos of your route:  </label>
+                 <input type= "file" ngf-select name= "file" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic1" />
+<!--
+                 <label for="images" id="routePic2">Upload Photos of your route:  </label>
+                 <input type= "file" ngf-select name= "file2" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic2" />
+                 <label for="images" id="routePic3">Upload Photos of your route:  </label>
+                 <input type= "file" ngf-select name= "file3" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic3" />
+                 <label for="images" id="routePic4">Upload Photos of your route:  </label>
+                 <input type= "file" ngf-select name= "file4" ngf-pattern="image/*" accept= "image/*" ng-model="profile.formData.routePic4" /> -->
+
                </div>
                <button type="submit" class= "btn btn-danger btn-md" ng-click="profile.newBikeRoute()">Save Bike Route</button>
              </form>
@@ -63,7 +92,6 @@
               <div class = "panel">
                 <div id="map" style="float:left; width:400px; height:400px"></div>
                 <div id="directionsPanel" style="float: right; width:350px; height:400px; overflow: auto">
-                 <button ng-click= "profile.saveMap()" >Save Map and Directions</button>
                 </div>
               </div>
                 <button class = "btn btn-success btn-md" ng-click="profile.initMap()">New Map</button>
@@ -80,7 +108,14 @@
                     <option value="lake of the isles, minneapolis, mn">Lake of the Isles</option>
                     <option value="lake calhoun, minneapolis, mn">Lake Calhoun</option>
                     <option value="st louis park, mn">SLP</option>
+                    <option value="lake nokomis, minneapolis, mn">Nokomis</option>
+                    <option value="brooklyn center, mn">Brooklyn Center</option>
+                    <option value="midtown, minneapolis, mn">Midtown Minneapolis</option>
+                    <option value="uptown, minneapolis, mn">Uptown Minneapolis</option>
                     <option value="cedar lake, minneapolis, mn">Cedar Lake</option>
+                    <option value="target field, minneapolis, mn">Target Field</option>
+                    <option value="theodore wirth park, minneapolis, mn">Theo Wirth Park</option>
+                    <option value="twin lake, minneapolis, mn">Twin Lake</option>
 
                   </select>
                   <strong>End: </strong>
@@ -95,14 +130,47 @@
                     <option value="lake of the isles, minneapolis, mn">Lake of the Isles</option>
                     <option value="lake calhoun, minneapolis, mn">Lake Calhoun</option>
                     <option value="st louis park, mn">SLP</option>
+                    <option value="lake nokomis, minneapolis, mn">Nokomis</option>
+                    <option value="brooklyn center, mn">Brooklyn Center</option>
+                    <option value="midtown, minneapolis, mn">Midtown Minneapolis</option>
+                    <option value="uptown, minneapolis, mn">Uptown Minneapolis</option>
                     <option value="cedar lake, minneapolis, mn">Cedar Lake</option>
-
+                    <option value="target field, minneapolis, mn">Target Field</option>
+                    <option value="theodore wirth park, minneapolis, mn">Theo Wirth Park</option>
+                    <option value="twin lake, minneapolis, mn">Twin Lake</option>
                   </select>
-
               </div>
            </div>
          </div>
       </div>
+
+      <div class = "container">
+        <h2> Search Bike Routes</h2>
+          <label for="startLocation">Start Location: </label>
+          <input type="text" class = "form-control" id="startSearch" ng-model = "profile.startSearch" />
+          <label for="endSearch">End Location: </label>
+          <input type="text" class = "form-control" id="endSearch" ng-model = "profile.endSearch" />
+            <button type="submit" class= "btn btn-info btn-lg" ng-click="profile.searchAction()">Search Routes</button>
+            <div class = "well" ng-repeat= "bikeroute in profile.searchRoutes track by $index">
+              <div class = "well">
+                <div class = "row">
+                  <div class = "col-md-2"><h3>Start: {{bikeroute.startLocation}}</h3></br>
+                  <h3>End: {{bikeroute.endLocation}}</h3>
+                  </div>
+                  <div class = "col-md-6">
+                    <h3>How I got there: </h3> <p>{{bikeroute.comments}}</p>
+                  </div>
+                  <div clas="col-md-4" id="routePic1">
+                    <img ng-src = "/images/{{bikeroute.routePic1[0]}}"  style = "width: 250px; height: 250px" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+
+
     <div class="container">
      <div class="row">
       <div class="span12">
