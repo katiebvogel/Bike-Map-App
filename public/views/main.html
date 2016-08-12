@@ -7,7 +7,7 @@
 
     <!-- CSS -->
   <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet"  href="./style.css" />
 
   <!-- JS Source -->
   <script src="vendors/angular/angular.js"></script>
@@ -32,7 +32,6 @@
 </head>
 <body ng-controller = "MainController as main">
 
-<div ng-style="{'background-image': 'url(/vendors/riserhandlebars.jpg)'}"></div>
   <div class = "container" id="background">
     <div class="bgSizeContain">
       <img src="/vendors/riserhandlebars.jpg" />
@@ -45,34 +44,28 @@
 
 
   <div ng-controller="CarouselDemoCtrl">
-    <div style="height: 305px">
-      <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-        <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-          <img ng-src="{{slide.image}}" style="margin:auto;">
-          <div class="carousel-caption">
-            <h4>Slide {{slide.id}}</h4>
-            <p>{{slide.text}}</p>
-          </div>
+  <div style="height: 305px">
+    <carousel interval="myInterval">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+          <h4>Slide {{$index}}</h4>
+          <p>{{slide.text}}</p>
         </div>
-      </div>
+      </slide>
+    </carousel>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
     </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-        <button type="button" class="btn btn-info" ng-click="randomize()">Randomize slides</button>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="noWrapSlides">
-            Disable Slide Looping
-          </label>
-        </div>
-      </div>
-      <div class="col-md-6">
-        Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
-        <br />Enter a negative number or 0 to stop the interval.
-      </div>
+    <div class="col-md-6">
+      Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+      <br />Enter a negative number or 0 to stop the interval.
     </div>
   </div>
+</div>
+
 
 
 

@@ -1,0 +1,8 @@
+
+ #background {
+  height: 200px;
+  background-image: url('vendors/riserhandlebars.jpg');
+  background-size: cover;
+  border: 2px solid darkgray;
+  color: #000; text-shadow: 1px 1px 0 #fff;
+}
