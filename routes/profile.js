@@ -38,9 +38,6 @@ router.post('/', images.single('file'), function(request, response){
     endLocation: request.body.endLocation,
     comments: request.body.comments,
     routePic1: request.file.filename};
-    // routePic2: request.file2.filename,
-    // routePic3: request.file3.filename,
-    // routePic3: request.file4.filename};
 
     bikeRoute.model.create(routeObj, function(error, bikeRoute) {
 
@@ -63,47 +60,63 @@ User.findOne({_id: vm.userId}, function(error, user){
 
 
 
+
+
 //save the updates made to a bikeroute .  see code block below ---
 router.put('/updateWithId/:id', function(request, response){
   console.log('made it to the router.put for updating', request.params.id);
+  console.log('here is the request.body', request.body);
 
 var id = request.params.id;
 var responseData = {};
+var userId = request.user._id;
 
 var routeObj = {
-  startLocation: request.body.startLocation,
-  endLocation: request.body.endLocation,
-  comments: request.body.comments};
+  startLocation: request.body.route.startLocation,
+  endLocation: request.body.route.endLocation,
+  comments: request.body.route.comments
+};
+console.log("route object", routeObj);
 
-bikeRoute.model.findByIdAndUpdate(id, routeObj, {upsert: true}, function(error, userRoute){
-  if(error) {
-  console.log('error finding by id for update', error);
-  responseData.One = "error";
-} else {
-  console.log('success in updating bike route in ROUTES collection');
-  // bikeRoute.model.startLocation = routeObj.startLocation;
-  // bikeRoute.model.endLocation = routeObj.endLocation;
-  // bikeRoute.model.comments = routeObj.comments;
-  bikeRoute.model.save(function(error){
-    if(error) throw error; 
-  })
-  responseData.One = "success";
-}
-response.send(responseData);
-});
-// User.findOne({_id: vm.userId}, function(error, user){
-// if(error) {
-// console.log('error finding which user you are for the update');
-// responseData.Two = 'error finding yourself';
+// bikeRoute.model.findByIdAndUpdate(id, routeObj, {upsert: true}, function(error, userRoute){
+//   if(error) {
+//   console.log('error finding by id for update', error);
+//   responseData.One = "error";
 // } else {
-// user.routes.id(id).update();
-// user.save(function(error){
-//   console.log('error saving user while deleting route');
-//   responseData.Two = "error saving while deleting route";
-// });
+//   console.log('success in updating bike route in ROUTES collection');
+//   bikeRoute.model.startLocation = routeObj.startLocation;
+//   bikeRoute.model.endLocation = routeObj.endLocation;
+//   bikeRoute.model.comments = routeObj.comments;
+//   bikeRoute.model.save(function(error){
+//     if(error) throw error;
+//   })
+//   responseData.One = "success";
 // }
 // response.send(responseData);
 // });
+User.findOne({_id: userId}, function(error, user){
+  if(error) {
+    console.log('error finding which user you are for the update');
+    responseData.Two = 'error finding yourself';
+  } else {
+
+    var bikeRouteToEdit = user.routes.id(id);
+
+    bikeRouteToEdit.startLocation = routeObj.startLocation;
+    bikeRouteToEdit.endLocation = routeObj.endLocation;
+    bikeRouteToEdit.comments = routeObj.comments;
+
+    user.save(function(error){
+      if (error){
+        response.sendStatus(500);
+      } else {
+        response.sendStatus(200);
+      }
+
+    });
+  }
+// response.send(responseData);
+});
 
 
 }); //end router.put for the update bikeroute function
@@ -156,11 +169,16 @@ response.send(responseData);
 //below is a block that looks up bikeRoutes in the DB according to keywords
 //specifically, start or end locations
 router.put('/keywordsearch', function(request, response){
-  // console.log('requesting data from keyword search', request.body.startSearch);
+
+  var vm = {};
+
   vm.start = request.body.startSearch;
   vm.end = request.body.endSearch;
-  // console.log('is my variable right?', vm.start, vm.end);
-  bikeRoute.model.find({$or:[{'startLocation': vm.start}, {'endLocation': vm.end} ]}, function(error, bikeRoute){
+
+// var likeEnd = new RegExp('.*' + vm.end + '.*');
+// var likeStart = new RegExp('.*' + vm.start + '.*');
+
+  bikeRoute.model.find({$or:[{'startLocation':  vm.start}, {'endLocation': vm.end }, {'startLocation': vm.end}, {'endLocation': vm.start} ]}, function(error, bikeRoute){
     if(error){
       response.send('error getting the keyworded routes from DB', error);
     } else  {
@@ -169,7 +187,13 @@ router.put('/keywordsearch', function(request, response){
   });
 }); //end router.put
 
-
+// User.find({}, 'routes', function(error, routes){
+//     if(error){
+//       response.send('error getting the keyworded routes from DB', error);
+//     } else  {
+//       response.send(routes);
+//     }
+// });
 
 
 

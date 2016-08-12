@@ -31,7 +31,7 @@
                  <div class = "row">
 
 
-                <button ng-click= "profile.editAction(route)"  class = "btn btn-warning btn-lg active">Edit</button>
+                <button ng-click= "profile.editAction(route)"  class = "btn btn-warning btn-sm active">Edit</button>
 
                      <div class = "col-md-2">
                        <h3>Start: {{route.startLocation}}</h3></br>
@@ -49,8 +49,8 @@
                        <img ng-src = "/images/{{route.routePic1[0]}}"  style = "width: 250px; height: 250px" />
                      </div>
 
-                     <button ng-click= "profile.removeAction(route._id)" ng-model = "route" class = "btn btn-danger btn-md active">Delete</button>
-                     <button ng-show="route.editing" ng-click= "profile.saveUpdatesAction(route)"  class = "btn btn-success btn-md active">Save Updates</button>
+                     <button ng-click= "profile.removeAction(route._id)" ng-model = "route" class = "btn btn-danger btn-sm active">Delete</button>
+                     <button ng-show="route.editing" ng-click= "profile.saveUpdatesAction(route)"  class = "btn btn-success btn-sm active">Save Updates</button>
                </div>
              </div>
            </div>
