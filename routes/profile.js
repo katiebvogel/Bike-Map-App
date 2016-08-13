@@ -78,22 +78,22 @@ var routeObj = {
 };
 console.log("route object", routeObj);
 
-// bikeRoute.model.findByIdAndUpdate(id, routeObj, {upsert: true}, function(error, userRoute){
-//   if(error) {
-//   console.log('error finding by id for update', error);
-//   responseData.One = "error";
-// } else {
-//   console.log('success in updating bike route in ROUTES collection');
-//   bikeRoute.model.startLocation = routeObj.startLocation;
-//   bikeRoute.model.endLocation = routeObj.endLocation;
-//   bikeRoute.model.comments = routeObj.comments;
+bikeRoute.model.findByIdAndUpdate(id, routeObj, {upsert: true}, function(error, userRoute){
+  if(error) {
+  console.log('error finding by id for update', error);
+  responseData.One = "error";
+} else {
+  console.log('success in updating bike route in ROUTES collection');
+  bikeRoute.model.startLocation = routeObj.startLocation;
+  bikeRoute.model.endLocation = routeObj.endLocation;
+  bikeRoute.model.comments = routeObj.comments;
 //   bikeRoute.model.save(function(error){
 //     if(error) throw error;
 //   })
 //   responseData.One = "success";
-// }
+}
 // response.send(responseData);
-// });
+});
 User.findOne({_id: userId}, function(error, user){
   if(error) {
     console.log('error finding which user you are for the update');
@@ -134,7 +134,7 @@ User.findOne({_id: userId}, function(error, user){
 router.delete('/removeWithId/:id', function(request, response){
   var id = request.params.id;
   var responseData = {};
-  // console.log('here is the id of the route clicked:', request.params.id);
+  console.log('here is the id of the route clicked:', request.params.id);
 
   bikeRoute.model.findByIdAndRemove(id, function(error, userRoute){
     if(error) {
@@ -177,6 +177,7 @@ router.put('/keywordsearch', function(request, response){
 
 // var likeEnd = new RegExp('.*' + vm.end + '.*');
 // var likeStart = new RegExp('.*' + vm.start + '.*');
+
 
   bikeRoute.model.find({$or:[{'startLocation':  vm.start}, {'endLocation': vm.end }, {'startLocation': vm.end}, {'endLocation': vm.start} ]}, function(error, bikeRoute){
     if(error){

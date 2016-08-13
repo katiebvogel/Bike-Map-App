@@ -197,11 +197,11 @@ $http.put('/profile/updateWithId/' + route._id, sendData).then(function(response
 // add a delete route function and button
 vm.removeAction = function(route){
   console.log('you chose to remove', route);
-  $http.put('/profile/removeWithId/' + route ).then(function(response){
+  $http.delete('/profile/removeWithId/' + route ).then(function(response){
     vm.route = response.data;
     console.log(response);
   }, function(response){
-    console.log('failure deleting');
+    console.log('failure deleting', response);
   })
 };
    //end remove button click function

@@ -14,7 +14,7 @@
     </div>
    </div>
  </div>
-   <div class = "container">
+   <div class = "container" id= "backgroundProfile">
 
 
 
@@ -140,13 +140,14 @@
          </div>
       </div>
 
-      <div class = "container">
+      <div class = "container" id="backgroundProfile" style="width: 400px; height: 300px;">
         <h2> Search Bike Routes</h2>
           <label for="startLocation">Start Location: </label>
           <input type="text" class = "form-control" id="startSearch" ng-model = "profile.startSearch" />
           <label for="endSearch">End Location: </label>
           <input type="text" class = "form-control" id="endSearch" ng-model = "profile.endSearch" />
             <button type="submit" class= "btn btn-info btn-lg" ng-click="profile.searchAction()">Search Routes</button>
+        </div>
             <div class = "well" ng-repeat= "bikeroute in profile.searchRoutes track by $index">
               <div class = "well">
                 <div class = "row">
@@ -163,7 +164,7 @@
               </div>
             </div>
 
-        </div>
+      
 
 
 
