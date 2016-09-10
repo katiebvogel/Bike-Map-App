@@ -1,14 +1,21 @@
-
+/*
  #background {
   height: 200px;
   background-color: lightgrey;
   background-size: cover;
   border: 2px solid darkgray;
   color: #000; text-shadow: 1px 1px 0 #fff;
-}
+}*/
 
 #backgroundProfile {
   background-image: url('vendors/riserhandlebars.jpg');
   background-size: cover;
-  text-decoration-color: black;
+  margin-top: 200px;
+  margin-bottom: 200px;
+
+}
+
+#carousel {
+  margin-top: 100px;
+  margin-bottom: 200px;
 }
