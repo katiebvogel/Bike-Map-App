@@ -1,19 +1,19 @@
-<div class = "col-md-7">
-  <div class = "panel panel-default">
-    <form name = "newUserForm" enctype = "multipart/form-data" novalidate>
-      <div class = "form-group">
-        <label for="username">Username</label>
-        <input type="text" class = "form-control" id="username" ng-model = "register.formData.username" />
-        <label for="password">Password</label>
-        <input type="text" class = "form-control" id="password" ng-model = "register.formData.password" />
-        <label for="about">About me: </label>
-        <input type="text" class = "form-control" id="about" ng-model = "register.formData.about" />
+<div class="col-md-7">
+    <div class="panel panel-default">
+        <form name="newUserForm" enctype="multipart/form-data" novalidate>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" ng-model="register.formData.username" />
+                <label for="password">Password</label>
+                <input type="text" class="form-control" id="password" ng-model="register.formData.password" />
+                <label for="about">About me: </label>
+                <input type="text" class="form-control" id="about" ng-model="register.formData.about" />
 
-        <label for="text" id="profilePic" readonly>Load Profile Picture</label>
-        <input type="file" ngf-select name = "file" ngf-pattern="image/*" accept= "image/*" ngf-fix-orientation="true" ng-model="register.formData.profilePic"/>
+                <label for="text" id="profilePic" readonly>Load Profile Picture</label>
+                <input type="file" ngf-select name="file" ngf-pattern="image/*" accept="image/*" ngf-fix-orientation="true" ng-model="register.formData.profilePic" />
 
-       </div>
-        <button type="submit" class= "btn btn-danger btn-md" ng-click="register.registerUser()">Submit Registration</button>
-    </form>
-  </div>
+            </div>
+            <button type="submit" class="btn btn-danger btn-md" ng-click="register.registerUser()">Submit Registration</button>
+        </form>
+    </div>
 </div>

@@ -1,50 +1,52 @@
 <!DOCTYPE html>
-<html ng-app= "bikeApp">
-  <head>
+<html ng-app="bikeApp">
+
+<head>
     <meta charset="utf-8">
     <title>bikeApp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-  <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet"  href="./style.css" />
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./style.css" />
 
-  <!-- JS Source -->
-  <script src="vendors/angular/angular.js"></script>
-  <script src="vendors/angular-route/angular-route.js"></script>
-  <script src="vendors/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
-  <script src="vendors/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
-  <script src = "vendors/ng-file-upload/dist/ng-file-upload.js"></script>
-  <script type="text/javascript"  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvg3_r7rbX0ylxvpWSwX8jL5DIvsQGibc&Libraries=geometry&sensor=true"></script>
+    <!-- JS Source -->
+    <script src="vendors/angular/angular.js"></script>
+    <script src="vendors/angular-route/angular-route.js"></script>
+    <script src="vendors/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+    <script src="vendors/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="vendors/ng-file-upload/dist/ng-file-upload.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvg3_r7rbX0ylxvpWSwX8jL5DIvsQGibc&Libraries=geometry&sensor=true"></script>
 
 
-  <script src="scripts/bikeApp.module.js"></script>
-  <script src="scripts/bikeApp.config.js"></script>
-  <script src="scripts/gservice.js"></script>
-  <script src="scripts/userService.js"></script>
-  <script src="scripts/MainController.js"></script>
-  <script src = "scripts/CarouselDemoController.js"></script>
-  <script src="scripts/ProfileController.js"></script>
-  <script src="scripts/RegisterController.js"></script>
-  <!-- <script src="scripts/gservice.js"></script> -->
+    <script src="scripts/bikeApp.module.js"></script>
+    <script src="scripts/bikeApp.config.js"></script>
+    <script src="scripts/gservice.js"></script>
+    <script src="scripts/userService.js"></script>
+    <script src="scripts/MainController.js"></script>
+    <script src="scripts/CarouselDemoController.js"></script>
+    <script src="scripts/ProfileController.js"></script>
+    <script src="scripts/RegisterController.js"></script>
+    <!-- <script src="scripts/gservice.js"></script> -->
 
-  <base href="/" />
+    <base href="/" />
 </head>
-<body ng-controller = "MainController as main">
-<div class = "jumbotron">
-  <div class = "container" id="background">
-    <div class="bgSizeContain">
-      <img src="/vendors/riserhandlebars.jpg" />
-      <h1>Welcome to a Life Behind Bars</h1>
-      <h3>
+
+<body ng-controller="MainController as main">
+    <div class="jumbotron">
+        <div class="container" id="background">
+            <div class="bgSizeContain">
+                <img src="/vendors/riserhandlebars.jpg" />
+                <h1>Welcome to a Life Behind Bars</h1>
+                <h3>
         Behind Bars is your solution to creating, saving, and sharing convenient bike routes around the Twin Cities.
       </h3>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
-  <!-- <div ng-controller="CarouselDemoCtrl">
+    <!-- <div ng-controller="CarouselDemoCtrl">
   <div id="carousel" style="height: 200px">
     <carousel interval="myInterval">
       <slide ng-repeat="slide in slides" active="slide.active">
@@ -65,46 +67,48 @@
       <br />Enter a negative number or 0 to stop the interval.
     </div>
   </div>
-</div> --> 
+</div> -->
 
 
 
 
-<div class = "col-md-2">
-  <div class="panel panel-default">
-    <div class = "panel-heading">
-      <h2 class= "panel-title text-center">Plan Your Life Behind Bars</h2>
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Plan Your Life Behind Bars</h2>
+            </div>
+
+            <div class="panel-body">
+                <label for="username">Username</label>
+                <input type="text" id="username" ng-model="main.username" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" ng-model="main.password" required />
+                <button class="btn btn-success btn-md" ng-click="main.loginUser()">Login</button>
+            </div>
+        </div>
     </div>
 
-    <div class="panel-body">
-          <label for="username">Username</label>
-          <input type="text"  id="username"
-          ng-model="main.username" required>
-          <label for="password">Password</label>
-          <input type="password"  id="password" ng-model="main.password" required />
-        <button class = "btn btn-success btn-md" ng-click="main.loginUser()">Login</button>
+
+    <div class="col-md-7">
+        <div class="panel pull-right">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center">Create a New Profile</h2>
+            </div>
+            <div class="panel-body">
+                <a href="/register">
+                    <button class="btn btn-warning btn-md">Register</button>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <div class="col-md-12" ng-view class="loginOrRegisterDisplay">
 
 
-<div class = "col-md-7">
-  <div class = "panel pull-right">
-    <div class = "panel-heading">
-      <h2 class= "panel-title text-center">Create a New Profile</h2>
+
     </div>
-    <div class="panel-body">
-      <a href="/register"><button class= "btn btn-warning btn-md">Register</button></a>
-      </div>
-    </div>
-</div>
-
-<div  class = "col-md-12" ng-view class="loginOrRegisterDisplay">
-
-
-
-</div>
 
 
 </body>
+
 </html>
